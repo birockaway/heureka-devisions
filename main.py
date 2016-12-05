@@ -143,8 +143,8 @@ for i in range(len(scrape_dates)):
 		                visits = float(visits_temp)
 		                # name cisteni a uprava
 		                name = cells[0].string
-		                if name == None :
-		                    name = entity
+		                #if name == None :
+		                 #   name = entity
 
 		                prvekL = {'shop':shop,
 		                        'date':scrape_date,
