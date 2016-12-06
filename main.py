@@ -144,7 +144,7 @@ for i in range(len(scrape_dates)):
 		                # name cisteni a uprava
 		                name = cells[0].string
 		                if name == None :
-		                    name = entity
+		                    name = cells[0].text.encode('utf8').replace('&raquo','').replace(' ;','')
 
 		                prvekL = {'shop':shop,
 		                        'date':scrape_date,
