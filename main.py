@@ -148,7 +148,7 @@ for i in range(len(scrape_dates)):
 				if name!='Celkem' :
 		                	prvekL = {'shop':shop,
 		                        	'date':scrape_date,
-		                        	'name':name,
+		                        	'category':name,
 		                        	'visits':visits,
 		                        	'cpc':cpc,
 		                        	'costs':costs,
@@ -159,11 +159,12 @@ for i in range(len(scrape_dates)):
 		            #    prvekL.append(value)
 
 
-		        keys = ['name', 'visits', 'cpc', 'costs', 'currency','shop','date']
+		        keys = ['shop','date','category', 'visits', 'cpc', 'costs', 'currency']
 		        #csv.register_dialect('singlequote', quotechar="'", quoting=csv.QUOTE_ALL)
 		        #csv.register_dialect('escaped', escapechar='\\', doublequote=False, quoting=csv.QUOTE_NONE)
 
-		        with open('/data/out/tables/'+parameters.get('Entity').get(entity).get(login).get('Shop_name')[index]+'.csv', 'ab') as output_file:
+		        with open('/data/out/tables/'+parameters.get('Entity').get(entity).get(login).get('Shop_
+													  ')[index]+'.csv', 'ab') as output_file:
 		            dict_writer = csv.DictWriter(output_file, keys, quoting=csv.QUOTE_NONNUMERIC)
 		            dict_writer.writeheader()
 		            dict_writer.writerows(L)
