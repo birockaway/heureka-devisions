@@ -145,15 +145,15 @@ for i in range(len(scrape_dates)):
 		                name = cells[0].string
 		                if name == None :
 		                    name = cells[0].text.encode('utf8').replace('&raquo','').replace(' ;','')
-
-		                prvekL = {'shop':shop,
-		                        'date':scrape_date,
-		                        'name':name,
-		                        'visits':visits,
-		                        'cpc':cpc,
-		                        'costs':costs,
-		                        'currency':currency}
-		                L.append(prvekL)
+				if name!='Celkem' :
+		                	prvekL = {'shop':shop,
+		                        	'date':scrape_date,
+		                        	'name':name,
+		                        	'visits':visits,
+		                        	'cpc':cpc,
+		                        	'costs':costs,
+		                        	'currency':currency}
+		                	L.append(prvekL)
 		            #for cell in cells:
 		            #    value = cell.string
 		            #    prvekL.append(value)
