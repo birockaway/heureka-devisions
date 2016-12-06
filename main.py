@@ -141,22 +141,22 @@ for i in range(len(scrape_dates)):
 		                # visits cisteni a uprava
 		                visits_temp = cells[1].string.replace('&nbsp;','') #pro pripad, ze je cislo vetsi nez 999 a cislo je ve formatu 'X XXX'
 		                visits = float(visits_temp)
-		                # name cisteni a uprava
-		                name = cells[0].string
-		                #if name == None :
-		                 #   name = entity
-
-		                prvekL = {'shop':shop,
-		                        'date':scrape_date,
-		                        'name':name,
-		                        'visits':visits,
-		                        'cpc':cpc,
-		                        'costs':costs,
-		                        'currency':currency}
-		                L.append(prvekL)
-		            #for cell in cells:
-		            #    value = cell.string
-		            #    prvekL.append(value)
+		               # name cisteni a uprava
+                        name = cells[0].string
+                        if name == None :
+                            name = cells[0].text.encode('utf8').replace('&raquo','').replace(' ;','')
+                        if name!='Celkem':
+                            prvekL = {'shop':shop,
+                                    'date':scrape_date,
+                                    'name':name,
+                                    'visits':visits,
+                                    'cpc':cpc,
+                                    'costs':costs,
+                                    'currency':currency}
+                            L.append(prvekL)
+                    #for cell in cells:
+                    #    value = cell.string
+                    #    prvekL.append(value)
 
 
 		        keys = ['name', 'visits', 'cpc', 'costs', 'currency','shop','date']
