@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import mechanize
 import cookielib
 from BeautifulSoup import BeautifulSoup
