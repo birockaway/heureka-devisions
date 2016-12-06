@@ -119,29 +119,28 @@ for i in range(len(scrape_dates)):
 		        rows = BeautifulSoup(str(tabulka)).findChildren(['tr'])
 
 
-		        L = [] # deklarujeme prazdny list s vysledky
-		        for row in rows:
-		            cells = row.findChildren('td')
-		            cells = cells[0:4] #chceme jen jmeno vyhledavace a prvni tri hodnty
-		            if len(cells) >= 4 :
-		                # costs cisteni a uprava
-		                temp = sanitizeStrings(cells[3])
-		                costs = temp[0]
-		                currency = temp[1]
-		                if currency == u'nbsp;Kč' :
-		                    currency = 'CZK'
-		                if currency == u'nbsp;€' :
-		                    currency = 'EUR'
-		                # cpc cisteni a uprava
-		                #print(costs)
-		                #print(currency)
-		                temp = sanitizeStrings(cells[2])
-		                cpc = temp[0]
-
-		                # visits cisteni a uprava
-		                visits_temp = cells[1].string.replace('&nbsp;','') #pro pripad, ze je cislo vetsi nez 999 a cislo je ve formatu 'X XXX'
-		                visits = float(visits_temp)
-		               # name cisteni a uprava
+ L = [] # deklarujeme prazdny list s vysledky
+                for row in rows:
+                    cells = row.findChildren('td')
+                    cells = cells[0:4] #chceme jen jmeno vyhledavace a prvni tri hodnty
+                    if len(cells) >= 4 :
+                        # costs cisteni a uprava
+                        temp = sanitizeStrings(cells[3])
+                        costs = temp[0]
+                        currency = temp[1]
+                        if currency == u'nbsp;Kč' :
+                            currency = 'CZK'
+                        if currency == u'nbsp;€' :
+                            currency = 'EUR'
+                        # cpc cisteni a uprava
+                        #print(costs)
+                        #print(currency)
+                        temp = sanitizeStrings(cells[2])
+                        cpc = temp[0]
+                        # visits cisteni a uprava
+                        visits_temp = cells[1].string.replace('&nbsp;','') #pro pripad, ze je cislo vetsi nez 999 a cislo je ve formatu 'X XXX'
+                        visits = float(visits_temp)
+                        # name cisteni a uprava
                         name = cells[0].string
                         if name == None :
                             name = cells[0].text.encode('utf8').replace('&raquo','').replace(' ;','')
@@ -157,11 +156,9 @@ for i in range(len(scrape_dates)):
                     #for cell in cells:
                     #    value = cell.string
                     #    prvekL.append(value)
-
-
-		        keys = ['name', 'visits', 'cpc', 'costs', 'currency','shop','date']
-		        #csv.register_dialect('singlequote', quotechar="'", quoting=csv.QUOTE_ALL)
-		        #csv.register_dialect('escaped', escapechar='\\', doublequote=False, quoting=csv.QUOTE_NONE)
+                keys = ['name', 'visits', 'cpc', 'costs', 'currency','shop','date']
+                #csv.register_dialect('singlequote', quotechar="'", quoting=csv.QUOTE_ALL)
+                #csv.register_dialect('escaped', escapechar='\\', doublequote=False, quoting=csv.QUOTE_NONE)
 
 		        with open('/data/out/tables/'+parameters.get('Entity').get(entity).get(login).get('Shop_name')[index]+'.csv', 'ab') as output_file:
 		            dict_writer = csv.DictWriter(output_file, keys, quoting=csv.QUOTE_NONNUMERIC)
