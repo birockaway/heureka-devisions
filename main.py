@@ -166,6 +166,6 @@ for i in range(len(scrape_dates)):
 		        with open('virtualenvs/heureka/data/out/tables/'+parameters.get('Entity').get(entity).get(login).get('Shop_name')[index]+'.csv', 'ab') as output_file:
                     		dict_writer = csv.DictWriter(output_file, keys, quoting=csv.QUOTE_NONNUMERIC)
                     		if (i==0):
-                       		dict_writer.writeheader()
-                        	print "writing header"
+                       			dict_writer.writeheader()
+                        		print "writing header"
                     		dict_writer.writerows(L)
