@@ -145,7 +145,7 @@ for i in range(len(scrape_dates)):
 		                name = cells[0].string
 		                if name == None :
 		                    name = cells[0].text.encode('utf8').replace('&raquo','').replace(' ;','')
-				if name = 'Celkem' :
+				if name == 'Celkem' :
 		                	prvekL = {'shop':shop,
 		                        	'date':scrape_date,
 		                        	'category':name,
