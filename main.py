@@ -148,7 +148,7 @@ for i in range(len(scrape_dates)):
 				if name == 'Celkem' :
 		                	prvekL = {'shop':shop,
 		                        	'date':scrape_date,
-		                        	'category':'name',
+		                        	'category':name,
 		                        	'visits':visits,
 		                        	'cpc':cpc,
 		                        	'costs':costs,
