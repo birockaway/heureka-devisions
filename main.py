@@ -107,9 +107,9 @@ for i in range(len(scrape_dates)):
 
 		    for index in range(0,no_of_shops):
 		    	if entity=='Heureka.cz':
-		    		Url_stats='http://sluzby.heureka.cz/obchody/statistiky/?shop='+parameters.get('Entity').get(entity).get(login).get('Shop_id')[index]+'&from='+scrape_date+'&to='+scrape_date+'&cat=-3'
+		    		Url_stats='http://sluzby.heureka.cz/obchody/statistiky/?shop='+parameters.get('Entity').get(entity).get(login).get('Shop_id')[index]+'&from='+scrape_date+'&to='+scrape_date+'&cat=659'
 		        if entity=='Heureka.sk':
-		    		Url_stats='http://sluzby.heureka.sk/obchody/statistiky/?shop='+parameters.get('Entity').get(entity).get(login).get('Shop_id')[index]+'&from='+scrape_date+'&to='+scrape_date+'&cat=-3'
+		    		Url_stats='http://sluzby.heureka.sk/obchody/statistiky/?shop='+parameters.get('Entity').get(entity).get(login).get('Shop_id')[index]+'&from='+scrape_date+'&to='+scrape_date+'&cat=659'
 		        print "Beginning to extract stats from "+Url_stats
 		        shop = parameters.get('Entity').get(entity).get(login).get('Shop_name')[index]
 		        page = br.open(Url_stats).read()
@@ -145,7 +145,7 @@ for i in range(len(scrape_dates)):
 		                name = cells[0].string
 		                if name == None :
 		                    name = cells[0].text.encode('utf8').replace('&raquo','').replace(' ;','')
-				if name!='Celkem' :
+				if name='Celkem' :
 		                	prvekL = {'shop':shop,
 		                        	'date':scrape_date,
 		                        	'category':name,
