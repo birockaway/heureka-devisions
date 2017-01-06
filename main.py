@@ -162,6 +162,9 @@ for i in range(len(scrape_dates)):
 										'costs':costs,
 										'currency':currency}
 								L.append(prvekL)
+					else: 
+						print('Data for shop '+shop+' and '+category_id+' not found.')
+						break
 						#for cell in cells:
 						#    value = cell.string
 						#    prvekL.append(value)
