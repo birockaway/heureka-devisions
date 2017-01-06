@@ -17,7 +17,7 @@ parameters = cfg.get_parameters()
 
 #category_ids=['659','995']
 
-df = pd.read_csv('data/in/tables/category_ids.csv')
+df = pd.read_csv('/data/in/tables/category_ids.csv')
 category_ids = df.category_id 
 
 # date format checker
