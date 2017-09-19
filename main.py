@@ -87,9 +87,9 @@ for i in range(len(scrape_dates)):
 
 			# The site we will navigate into, handling it's session
 			if entity=='Heureka.cz':
-				Url_login='http://login.heureka.cz/login'
+				Url_login='https://ucet.heureka.cz/prihlaseni'
 			if entity=='Heureka.sk':
-				Url_login='http://login.heureka.sk/login'
+				Url_login='https://ucet.heureka.sk/prihlasenie'
 			br.open(Url_login)
 
 			# View available forms
@@ -97,10 +97,10 @@ for i in range(len(scrape_dates)):
 			#    print f
 
 			# Select the second (index one) form (the first form is a search query box)
-			br.select_form(nr=0)
+			br.select_form(nr=1)
 
 			# User credentials
-			br.form['mail'] = parameters.get('Entity').get(entity).get(login).get('Login')
+			br.form['email'] = parameters.get('Entity').get(entity).get(login).get('Login')
 			br.form['password'] = parameters.get('Entity').get(entity).get(login).get('Password')
 			# Login
 			br.submit()
