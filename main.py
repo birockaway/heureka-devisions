@@ -174,12 +174,10 @@ for i in range(len(scrape_dates)):
 						keys = ['shop','date','category', 'visits', 'cpc', 'costs', 'currency']
 						#csv.register_dialect('singlequote', quotechar="'", quoting=csv.QUOTE_ALL)
 						#csv.register_dialect('escaped', escapechar='\\', doublequote=False, quoting=csv.QUOTE_NONE)
-
+					except:
 						with open('/data/out/tables/'+parameters.get('Entity').get(entity).get(login).get('Shop_name')[index]+'.csv', 'ab') as output_file:
 									dict_writer = csv.DictWriter(output_file, keys, quoting=csv.QUOTE_NONNUMERIC)
 									if (i==0 and category_id==str(category_ids[0])):
 										dict_writer.writeheader()
 										print "writing header"
 									dict_writer.writerows(L)
-					except:
-						pass
