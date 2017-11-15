@@ -115,69 +115,68 @@ for i in range(len(scrape_dates)):
 			
 			for index in range(0,no_of_shops):
 				for category_id in category_ids:
-					try:
-						category_id=str(category_id)
+					category_id=str(category_id)
 
-						if entity=='Heureka.cz':
-							Url_stats='http://sluzby.heureka.cz/obchody/statistiky/?shop='+parameters.get('Entity').get(entity).get(login).get('Shop_id')[index]+'&from='+scrape_date+'&to='+scrape_date+'&cat='+category_id
-						if entity=='Heureka.sk':
-							Url_stats='http://sluzby.heureka.sk/obchody/statistiky/?shop='+parameters.get('Entity').get(entity).get(login).get('Shop_id')[index]+'&from='+scrape_date+'&to='+scrape_date+'&cat='+category_id
-						print "Beginning to extract stats from "+Url_stats
-						shop = parameters.get('Entity').get(entity).get(login).get('Shop_name')[index]
-						page = br.open(Url_stats).read()
-						tree = html.fromstring(page)
-						soup1 = BeautifulSoup(page)
-						tabulka = soup1('table',{'class':'shop-list roi'})
-						rows = BeautifulSoup(str(tabulka)).findChildren(['tr'])
-
-
-						L = [] # deklarujeme prazdny list s vysledky
-						for row in rows:
-							cells = row.findChildren('td')
-							cells = cells[0:4] #chceme jen jmeno vyhledavace a prvni tri hodnty
-							if len(cells) >= 4 :
-								# costs cisteni a uprava
-								temp = sanitizeStrings(cells[3])
-								costs = temp[0]
-								currency = temp[1]
-								if currency == u'nbsp;Kč' :
-									currency = 'CZK'
-								if currency == u'nbsp;€' :
-									currency = 'EUR'
-								# cpc cisteni a uprava
-								#print(costs)
-								#print(currency)
-								temp = sanitizeStrings(cells[2])
-								cpc = temp[0]
-
-								# visits cisteni a uprava
-								visits_temp = cells[1].string.replace('&nbsp;','') #pro pripad, ze je cislo vetsi nez 999 a cislo je ve formatu 'X XXX'
-								visits = float(visits_temp)
-								# name cisteni a uprava
-								name = cells[0].string
-								#if name == None :
-								#    name = cells[0].text.encode('utf8').replace('&raquo','').replace(' ;','')
-						if name == 'Celkem' :
-									prvekL = {'shop':shop,
-											'date':scrape_date,
-											'category':category_id,
-											'visits':visits,
-											'cpc':cpc,
-											'costs':costs,
-											'currency':currency}
-									L.append(prvekL)
-							#for cell in cells:
-							#    value = cell.string
-							#    prvekL.append(value)
+					if entity=='Heureka.cz':
+						Url_stats='http://sluzby.heureka.cz/obchody/statistiky/?shop='+parameters.get('Entity').get(entity).get(login).get('Shop_id')[index]+'&from='+scrape_date+'&to='+scrape_date+'&cat='+category_id
+					if entity=='Heureka.sk':
+						Url_stats='http://sluzby.heureka.sk/obchody/statistiky/?shop='+parameters.get('Entity').get(entity).get(login).get('Shop_id')[index]+'&from='+scrape_date+'&to='+scrape_date+'&cat='+category_id
+					print "Beginning to extract stats from "+Url_stats
+					shop = parameters.get('Entity').get(entity).get(login).get('Shop_name')[index]
+					page = br.open(Url_stats).read()
+					tree = html.fromstring(page)
+					soup1 = BeautifulSoup(page)
+					tabulka = soup1('table',{'class':'shop-list roi'})
+					rows = BeautifulSoup(str(tabulka)).findChildren(['tr'])
 
 
-						keys = ['shop','date','category', 'visits', 'cpc', 'costs', 'currency']
-						#csv.register_dialect('singlequote', quotechar="'", quoting=csv.QUOTE_ALL)
-						#csv.register_dialect('escaped', escapechar='\\', doublequote=False, quoting=csv.QUOTE_NONE)
-					except:
-						with open('/data/out/tables/'+parameters.get('Entity').get(entity).get(login).get('Shop_name')[index]+'.csv', 'ab') as output_file:
-									dict_writer = csv.DictWriter(output_file, keys, quoting=csv.QUOTE_NONNUMERIC)
-									if (i==0 and category_id==str(category_ids[0])):
-										dict_writer.writeheader()
-										print "writing header"
-									dict_writer.writerows(L)
+					L = [] # deklarujeme prazdny list s vysledky
+					for row in rows:
+						cells = row.findChildren('td')
+						cells = cells[0:4] #chceme jen jmeno vyhledavace a prvni tri hodnty
+						if len(cells) >= 4 :
+							# costs cisteni a uprava
+							temp = sanitizeStrings(cells[3])
+							costs = temp[0]
+							currency = temp[1]
+							if currency == u'nbsp;Kč' :
+								currency = 'CZK'
+							if currency == u'nbsp;€' :
+								currency = 'EUR'
+							# cpc cisteni a uprava
+							#print(costs)
+							#print(currency)
+							temp = sanitizeStrings(cells[2])
+							cpc = temp[0]
+
+							# visits cisteni a uprava
+							visits_temp = cells[1].string.replace('&nbsp;','') #pro pripad, ze je cislo vetsi nez 999 a cislo je ve formatu 'X XXX'
+							visits = float(visits_temp)
+							# name cisteni a uprava
+							name = cells[0].string
+							#if name == None :
+							#    name = cells[0].text.encode('utf8').replace('&raquo','').replace(' ;','')
+					if name == 'Celkem' :
+								prvekL = {'shop':shop,
+										'date':scrape_date,
+										'category':category_id,
+										'visits':visits,
+										'cpc':cpc,
+										'costs':costs,
+										'currency':currency}
+								L.append(prvekL)
+						#for cell in cells:
+						#    value = cell.string
+						#    prvekL.append(value)
+
+
+					keys = ['shop','date','category', 'visits', 'cpc', 'costs', 'currency']
+					#csv.register_dialect('singlequote', quotechar="'", quoting=csv.QUOTE_ALL)
+					#csv.register_dialect('escaped', escapechar='\\', doublequote=False, quoting=csv.QUOTE_NONE)
+
+					with open('/data/out/tables/'+parameters.get('Entity').get(entity).get(login).get('Shop_name')[index]+'.csv', 'ab') as output_file:
+								dict_writer = csv.DictWriter(output_file, keys, quoting=csv.QUOTE_NONNUMERIC)
+								if (i==0 and category_id==str(category_ids[0])):
+									dict_writer.writeheader()
+									print "writing header"
+								dict_writer.writerows(L)
