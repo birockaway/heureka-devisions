@@ -165,6 +165,11 @@ for i in range(len(scrape_dates)):
 										'costs':costs,
 										'currency':currency}
 								L.append(prvekL)
+						
+					else :
+						print("Category for given date not found")
+						
+						
 						#for cell in cells:
 						#    value = cell.string
 						#    prvekL.append(value)
