@@ -154,22 +154,20 @@ for i in range(len(scrape_dates)):
 							visits = float(visits_temp)
 							# name cisteni a uprava
 							name = cells[0].string
-							print("debugging")
-							print(name)
 							#if name == None :
 							#    name = cells[0].text.encode('utf8').replace('&raquo','').replace(' ;','')
-					if name == 'Celkem' :
-								prvekL = {'shop':shop,
-										'date':scrape_date,
-										'category':category_id,
-										'visits':visits,
-										'cpc':cpc,
-										'costs':costs,
-										'currency':currency}
-								L.append(prvekL)
+							
+							while True:
+							    if name == 'Celkem' :
+							        prvekL = {'shop':shop,
+    										'date':scrape_date,
+    										'category':category_id,
+    										'visits':visits,
+    										'cpc':cpc,
+    										'costs':costs,
+    										'currency':currency}
+    								L.append(prvekL)
 						
-					else :
-						print("Category for given date not found")
 						
 						
 						#for cell in cells:
