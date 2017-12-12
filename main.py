@@ -154,9 +154,11 @@ for i in range(len(scrape_dates)):
 							visits = float(visits_temp)
 							# name cisteni a uprava
 							name = cells[0].string
+							print("debugging")
+							print(name)
 							#if name == None :
 							#    name = cells[0].text.encode('utf8').replace('&raquo','').replace(' ;','')
-					if (name == None and name == 'Celkem') :
+					if name == 'Celkem' :
 								prvekL = {'shop':shop,
 										'date':scrape_date,
 										'category':category_id,
