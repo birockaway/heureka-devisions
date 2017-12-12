@@ -167,6 +167,7 @@ for i in range(len(scrape_dates)):
     										'costs':costs,
     										'currency':currency}
     								L.append(prvekL)
+								continue
 						
 						
 						
