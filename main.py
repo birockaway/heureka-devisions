@@ -153,21 +153,20 @@ for i in range(len(scrape_dates)):
 							visits_temp = cells[1].string.replace('&nbsp;','') #pro pripad, ze je cislo vetsi nez 999 a cislo je ve formatu 'X XXX'
 							visits = float(visits_temp)
 							# name cisteni a uprava
+							name = 'nazev'
 							name = cells[0].string
 							#if name == None :
 							#    name = cells[0].text.encode('utf8').replace('&raquo','').replace(' ;','')
-							
-							while True:
-							    if name == 'Celkem' :
-							        prvekL = {'shop':shop,
-    										'date':scrape_date,
-    										'category':category_id,
-    										'visits':visits,
-    										'cpc':cpc,
-    										'costs':costs,
-    										'currency':currency}
-    								L.append(prvekL)
-								continue
+					
+							if name == 'Celkem' :
+								prvekL = {'shop':shop,
+										'date':scrape_date,
+										'category':category_id,
+										'visits':visits,
+										'cpc':cpc,
+										'costs':costs,
+										'currency':currency}
+								L.append(prvekL)
 						
 						
 						
