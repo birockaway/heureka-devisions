@@ -119,7 +119,7 @@ for i in range(len(scrape_dates)):
 				for category_id in category_ids:
 					category_id=str(category_id)
 					
-					time.sleep(2)
+					time.sleep(1)
 
 					if entity=='Heureka.cz':
 						Url_stats='http://sluzby.heureka.cz/obchody/statistiky/?shop='+parameters.get('Entity').get(entity).get(login).get('Shop_id')[index]+'&from='+scrape_date+'&to='+scrape_date+'&cat='+category_id
