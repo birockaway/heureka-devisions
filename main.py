@@ -9,6 +9,8 @@ from keboola import docker
 import datetime
 from datetime import date, timedelta # date input
 import pandas as pd 
+import time
+
 
 # initialize KBC configuration 
 cfg = docker.Config('/data/')
