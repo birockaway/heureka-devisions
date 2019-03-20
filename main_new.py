@@ -98,9 +98,9 @@ for i in range(len(scrape_dates)):
                 for category_id in category_ids:
                     category_id = str(category_id)
                     if entity == 'Heureka.cz':
-                        Url_stats = 'http://sluzby.heureka.cz/obchody/statistiky/?shop=' + parameters.get('Entity').get(entity).get(login).get('Shop_id')[index] + '&from=' + scrape_date + '&to=' + scrape_date + '&cat=' + category_id
+                        report_url = browser.get('http://sluzby.heureka.cz/obchody/statistiky/?shop=' + parameters.get('Entity').get(entity).get(login).get('Shop_id')[index] + '&from=' + scrape_date + '&to=' + scrape_date + '&cat=' + category_id)
                     if entity == 'Heureka.sk':
-                        Url_stats = 'http://sluzby.heureka.sk/obchody/statistiky/?shop=' + parameters.get('Entity').get(entity).get(login).get('Shop_id')[index] + '&from=' + scrape_date + '&to=' + scrape_date + '&cat=' + category_id
+                        report_url = browser.get('http://sluzby.heureka.sk/obchody/statistiky/?shop=' + parameters.get('Entity').get(entity).get(login).get('Shop_id')[index] + '&from=' + scrape_date + '&to=' + scrape_date + '&cat=' + category_id)
 
                     # placeholder for SK heureka or sometihing simillar
                     shop = parameters.get('Entity').get(entity).get(login).get('Shop_name')[index]
@@ -130,15 +130,15 @@ for i in range(len(scrape_dates)):
                             visits = float(visits_temp)
                             # name cleaning...
                             name = cells[0].string
-                        if name == 'Celkem':
-                            prvekL = {'shop': shop,
-                                'date': scrape_date,
-                                'category': category_id,
-                                'visits': visits,
-                                'cpc': cpc,
-                                'costs': costs,
-                                'currency': currency}
-                            L.append(prvekL)
+                            if name == 'Celkem':
+                                prvekL = {'shop': shop,
+                                    'date': scrape_date,
+                                    'category': category_id,
+                                    'visits': visits,
+                                    'cpc': cpc,
+                                    'costs': costs,
+                                    'currency': currency}
+                                L.append(prvekL)
 
                     keys = ['shop', 'date', 'category', 'visits', 'cpc', 'costs', 'currency']
 
